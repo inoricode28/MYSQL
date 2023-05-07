@@ -13,7 +13,7 @@ una ves ingresando pones la clavbe de tu servidor
 
 
 Comandos:
-
+--> mysql -l localhost -u root -p //Imgreso al mysql
 --> system cls; --> limpiar mantalla en my MySQL
 --> show databases; --> muestra las base de datos de MYSQL
 --> use escuela; --> permite usar la base de datos que desees
