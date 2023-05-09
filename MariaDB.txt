@@ -1,0 +1,5 @@
+Hack
+Tutorial GITHUB cambio de fecha
+
+
+GIT_COMMITTER_DATE="2023-05-8 21:50:00" git commit --date="2023-05-8 21:50:00"
