@@ -20,3 +20,5 @@ Comandos:
 --> use escuela; --> permite usar la base de datos que desees
 --> show tables; --> muestas las tablas de escuela
 --> describe alumno; --> muestra una descripcion de la tablas de alumno
+--> select user from mysql.user; --> ver los usarios
+--> show procedure status like 'ActualizarStock'\G; --> Ver la exixtencia de un prodedimiento almacenado

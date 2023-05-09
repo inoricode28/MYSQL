@@ -86,3 +86,10 @@ INSERT INTO comments (title, user_id) VALUES ('Titulo 6',3);
 INSERT INTO comments (title, user_id) VALUES ('Titulo 7',2);
 INSERT INTO comments (title, user_id) VALUES ('Titulo 8',4);
 
+
+
+--MySQL
+--select user from mysql.user; --> ver los usarios
+
+--show procedure status like 'ActualizarStock'\G; --> Ver la exixtencia de un prodedimiento almacenado
+
