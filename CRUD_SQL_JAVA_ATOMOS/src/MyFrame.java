@@ -19,17 +19,21 @@ public class MyFrame extends JFrame implements ActionListener {
 
         
         JButton button = new JButton();
-        button.setBounds(240,50,100,50);
+        button.setBounds(600,50,100,50);
         button.setText("Boton 1");
        
 
         JButton button2 = new JButton();
-        button2.setBounds(240,110,100,50);
+        button2.setBounds(600,110,100,50);
         button2.setText("Boton 2");
 
         button3 = new JButton();
-        button3.setBounds(240,170,100,50);
+        button3.setBounds(600,170,100,50);
         button3.setText("Boton 3");
+
+        JButton button4 = new JButton();
+        button4.setBounds(600,230,100,50);
+        button4.setText("Boton 4");
 
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,6 +45,7 @@ public class MyFrame extends JFrame implements ActionListener {
         this.add(button);
         this.add(button2);
         this.add(button3);
+        this.add(button4);
     }
 
     @Override
