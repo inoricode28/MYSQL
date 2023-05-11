@@ -22,3 +22,5 @@ Comandos:
 --> describe alumno; --> muestra una descripcion de la tablas de alumno
 --> select user from mysql.user; --> ver los usarios
 --> show procedure status like 'ActualizarStock'\G; --> Ver la exixtencia de un prodedimiento almacenado
+--> mysqlsh -->Activa el modos mysql shell que trabaja con python y javascript
+-->actualizar
