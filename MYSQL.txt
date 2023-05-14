@@ -13,6 +13,7 @@ una ves ingresando pones la clavbe de tu servidor
 
 
 Comandos:
+-->mysql -h 192.168.1.175 -u Arch_Nova -p --> conexcion remota
 --> mysql -l localhost -u root -p //Imgreso al mysql
 --> system cls; --> limpiar mantalla en my MySQL
 --> \! cls; --> Limpia pantalla
