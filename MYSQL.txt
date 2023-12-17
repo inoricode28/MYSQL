@@ -25,3 +25,26 @@ Comandos:
 --> show procedure status like 'ActualizarStock'\G; --> Ver la exixtencia de un prodedimiento almacenado
 --> mysqlsh -->Activa el modos mysql shell que trabaja con python y javascript
 -->actualizar
+
+
+DUMPER
+//Dompear base de datos
+
+mysql -l 192.168.1.108 -u nova -p
+
+mysqldump -h 192.168.1.108 -u nova -p CRUD > dump.sql
+
+mysql -h 192.168.1.108 -u nova -p CRUD < CRUD_dump.sql
+
+mysql -h 192.168.1.108 -u nova -p sebastian < scrip_altared.sql
+
+mysql -h 192.168.1.108 -u nova -p BdVentas < BdVentas.sql
+
+
+mysql -h localhost -u root -p bdventasidat < BdVentas.sql
+
+mysql -h localhost -u root -p bdventasidat < bdventasidat.sql
+
+mysqldump -h 192.168.1.108 -u nova -p CRUD > dump.sql
+
+

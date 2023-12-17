@@ -1,0 +1,307 @@
+-- MariaDB dump 10.19  Distrib 10.4.28-MariaDB, for Win64 (AMD64)
+--
+-- Host: 192.168.1.108    Database: CRUD
+-- ------------------------------------------------------
+-- Server version	10.11.3-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `CATEGORIA`
+--
+
+DROP TABLE IF EXISTS `CATEGORIA`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `CATEGORIA` (
+  `ID_CATEGORIA` int(11) NOT NULL AUTO_INCREMENT,
+  `NOMBRE` varchar(50) NOT NULL,
+  `ESTADO` tinyint(1) NOT NULL,
+  PRIMARY KEY (`ID_CATEGORIA`),
+  UNIQUE KEY `NOMBRE` (`NOMBRE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `CATEGORIA`
+--
+
+LOCK TABLES `CATEGORIA` WRITE;
+/*!40000 ALTER TABLE `CATEGORIA` DISABLE KEYS */;
+/*!40000 ALTER TABLE `CATEGORIA` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `CLIENTES`
+--
+
+DROP TABLE IF EXISTS `CLIENTES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `CLIENTES` (
+  `ID_CLIENTE` int(11) NOT NULL AUTO_INCREMENT,
+  `NOMBRE` varchar(100) NOT NULL,
+  `DIRECCION` varchar(255) NOT NULL,
+  `TELEFONO` varchar(15) NOT NULL,
+  PRIMARY KEY (`ID_CLIENTE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `CLIENTES`
+--
+
+LOCK TABLES `CLIENTES` WRITE;
+/*!40000 ALTER TABLE `CLIENTES` DISABLE KEYS */;
+/*!40000 ALTER TABLE `CLIENTES` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `PEDIDOS`
+--
+
+DROP TABLE IF EXISTS `PEDIDOS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `PEDIDOS` (
+  `ID_PEDIDO` int(11) NOT NULL AUTO_INCREMENT,
+  `FECHA_PEDIDO` date NOT NULL,
+  `ID_PRODUCTO` int(11) NOT NULL,
+  `CANTIDAD` int(11) NOT NULL,
+  `MONTO_TOTAL` decimal(10,4) NOT NULL,
+  `ID_CLIENTE` int(11) NOT NULL,
+  `ID_PROVEEDOR` int(11) NOT NULL,
+  PRIMARY KEY (`ID_PEDIDO`),
+  KEY `ID_PRODUCTO` (`ID_PRODUCTO`),
+  KEY `ID_CLIENTE` (`ID_CLIENTE`),
+  KEY `ID_PROVEEDOR` (`ID_PROVEEDOR`),
+  CONSTRAINT `PEDIDOS_ibfk_1` FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `PRODUCTO` (`ID_PRODUCTO`),
+  CONSTRAINT `PEDIDOS_ibfk_2` FOREIGN KEY (`ID_CLIENTE`) REFERENCES `CLIENTES` (`ID_CLIENTE`),
+  CONSTRAINT `PEDIDOS_ibfk_3` FOREIGN KEY (`ID_PROVEEDOR`) REFERENCES `PROVEEDORES` (`ID_PROVEEDOR`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `PEDIDOS`
+--
+
+LOCK TABLES `PEDIDOS` WRITE;
+/*!40000 ALTER TABLE `PEDIDOS` DISABLE KEYS */;
+/*!40000 ALTER TABLE `PEDIDOS` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `PRODUCTO`
+--
+
+DROP TABLE IF EXISTS `PRODUCTO`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `PRODUCTO` (
+  `ID_PRODUCTO` int(11) NOT NULL AUTO_INCREMENT,
+  `NOMBRE` varchar(150) NOT NULL,
+  `MARCA` varchar(50) NOT NULL,
+  `COSTO` decimal(10,4) NOT NULL,
+  `PRECIO` decimal(10,4) NOT NULL,
+  `STOCK` int(11) NOT NULL,
+  `ESTADO` tinyint(1) NOT NULL,
+  `ID_CATEGORIA` int(11) NOT NULL,
+  PRIMARY KEY (`ID_PRODUCTO`),
+  UNIQUE KEY `NOMBRE` (`NOMBRE`),
+  KEY `ID_CATEGORIA` (`ID_CATEGORIA`),
+  CONSTRAINT `PRODUCTO_ibfk_1` FOREIGN KEY (`ID_CATEGORIA`) REFERENCES `CATEGORIA` (`ID_CATEGORIA`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `PRODUCTO`
+--
+
+LOCK TABLES `PRODUCTO` WRITE;
+/*!40000 ALTER TABLE `PRODUCTO` DISABLE KEYS */;
+/*!40000 ALTER TABLE `PRODUCTO` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `PROVEEDORES`
+--
+
+DROP TABLE IF EXISTS `PROVEEDORES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `PROVEEDORES` (
+  `ID_PROVEEDOR` int(11) NOT NULL AUTO_INCREMENT,
+  `NOMBRE` varchar(100) NOT NULL,
+  `DIRECCION` varchar(255) NOT NULL,
+  `TELEFONO` varchar(15) NOT NULL,
+  PRIMARY KEY (`ID_PROVEEDOR`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `PROVEEDORES`
+--
+
+LOCK TABLES `PROVEEDORES` WRITE;
+/*!40000 ALTER TABLE `PROVEEDORES` DISABLE KEYS */;
+/*!40000 ALTER TABLE `PROVEEDORES` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ROL`
+--
+
+DROP TABLE IF EXISTS `ROL`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ROL` (
+  `ID_ROL` int(11) NOT NULL AUTO_INCREMENT,
+  `NOMBRE` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID_ROL`),
+  UNIQUE KEY `NOMBRE` (`NOMBRE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ROL`
+--
+
+LOCK TABLES `ROL` WRITE;
+/*!40000 ALTER TABLE `ROL` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ROL` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `STOCK`
+--
+
+DROP TABLE IF EXISTS `STOCK`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `STOCK` (
+  `ID_STOCK` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_PRODUCTO` int(11) NOT NULL,
+  `UBICACION` varchar(50) NOT NULL,
+  `CANTIDAD` int(11) NOT NULL,
+  PRIMARY KEY (`ID_STOCK`),
+  KEY `ID_PRODUCTO` (`ID_PRODUCTO`),
+  CONSTRAINT `STOCK_ibfk_1` FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `PRODUCTO` (`ID_PRODUCTO`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `STOCK`
+--
+
+LOCK TABLES `STOCK` WRITE;
+/*!40000 ALTER TABLE `STOCK` DISABLE KEYS */;
+/*!40000 ALTER TABLE `STOCK` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `USUARIO`
+--
+
+DROP TABLE IF EXISTS `USUARIO`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `USUARIO` (
+  `ID_USUARIO` int(11) NOT NULL AUTO_INCREMENT,
+  `CORREO` varchar(255) NOT NULL,
+  `PASSWORD` tinyblob NOT NULL,
+  `ESTADO` tinyint(1) NOT NULL,
+  `ID_ROL` int(11) NOT NULL,
+  PRIMARY KEY (`ID_USUARIO`),
+  UNIQUE KEY `CORREO` (`CORREO`),
+  KEY `ID_ROL` (`ID_ROL`),
+  CONSTRAINT `USUARIO_ibfk_1` FOREIGN KEY (`ID_ROL`) REFERENCES `ROL` (`ID_ROL`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `USUARIO`
+--
+
+LOCK TABLES `USUARIO` WRITE;
+/*!40000 ALTER TABLE `USUARIO` DISABLE KEYS */;
+/*!40000 ALTER TABLE `USUARIO` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `VENTAS`
+--
+
+DROP TABLE IF EXISTS `VENTAS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `VENTAS` (
+  `ID_VENTA` int(11) NOT NULL AUTO_INCREMENT,
+  `FECHA_VENTA` date NOT NULL,
+  `ID_PRODUCTO` int(11) NOT NULL,
+  `CANTIDAD` int(11) NOT NULL,
+  `MONTO_TOTAL` decimal(10,4) NOT NULL,
+  PRIMARY KEY (`ID_VENTA`),
+  KEY `ID_PRODUCTO` (`ID_PRODUCTO`),
+  CONSTRAINT `VENTAS_ibfk_1` FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `PRODUCTO` (`ID_PRODUCTO`),
+  CONSTRAINT `fk_producto_venta` FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `PRODUCTO` (`ID_PRODUCTO`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `VENTAS`
+--
+
+LOCK TABLES `VENTAS` WRITE;
+/*!40000 ALTER TABLE `VENTAS` DISABLE KEYS */;
+/*!40000 ALTER TABLE `VENTAS` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `VENTAS_DETALLE`
+--
+
+DROP TABLE IF EXISTS `VENTAS_DETALLE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `VENTAS_DETALLE` (
+  `ID_DETALLE` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_VENTA` int(11) NOT NULL,
+  `ID_PRODUCTO` int(11) NOT NULL,
+  `CANTIDAD` int(11) NOT NULL,
+  `MONTO_TOTAL` decimal(10,4) NOT NULL,
+  PRIMARY KEY (`ID_DETALLE`),
+  KEY `ID_VENTA` (`ID_VENTA`),
+  KEY `ID_PRODUCTO` (`ID_PRODUCTO`),
+  CONSTRAINT `VENTAS_DETALLE_ibfk_1` FOREIGN KEY (`ID_VENTA`) REFERENCES `VENTAS` (`ID_VENTA`),
+  CONSTRAINT `VENTAS_DETALLE_ibfk_2` FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `PRODUCTO` (`ID_PRODUCTO`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `VENTAS_DETALLE`
+--
+
+LOCK TABLES `VENTAS_DETALLE` WRITE;
+/*!40000 ALTER TABLE `VENTAS_DETALLE` DISABLE KEYS */;
+/*!40000 ALTER TABLE `VENTAS_DETALLE` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-11-15  1:52:05
