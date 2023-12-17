@@ -47,4 +47,8 @@ mysql -h localhost -u root -p bdventasidat < bdventasidat.sql
 
 mysqldump -h 192.168.1.108 -u nova -p CRUD > dump.sql
 
+/////////
+mysqldump -h localhost -u root -p sistema > sistema.sql
+
+mysql -h localhost -u root -p sistema < sistema.sql
 
